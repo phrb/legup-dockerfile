@@ -1,5 +1,6 @@
 #### LegUp Docker Image
 
 This repository contains a Dockerfile
-to generate an image with LegUp completely
-installed, and ModelSim semi-installed.
+to generate an image with a LegUp
+installation, including Altera ModelSim and
+GXemul.
