@@ -31,19 +31,20 @@ RUN cd gxemul_src/gxemul-0.6.0.1 && ./configure && make -j4
 # Installing LegUp
 RUN mkdir legup_src && cd legup_src && wget http://legup.eecg.utoronto.ca/releases/legup-4.0.tar.gz
 RUN cd legup_src && tar xvzf legup-4.0.tar.gz
-# Warning: make ends with error 2, but compilation works.
-#          Must test if LegUp is installed properly.
-RUN cd legup_src/legup-4.0 && make -j4; exit 0 && PATH=$PWD/llvm/Release/bin:$PATH
+# Warning: Make ends with error 2. Altough LegUp seems to be compiled properly,
+#                                  you should test if it is.
+RUN cd legup_src/legup-4.0 && make -j4; exit 0
 
 # Installing ModelSim
 RUN mkdir modelsim_src && cd modelsim_src && wget http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/ModelSimSetup-13.1.0.162.run
 RUN cd modelsim_src && chmod +x ModelSimSetup-13.1.0.162.run
 
-ADD install_modelsim ./
+ADD install_modelsim.exp ./
 
+RUN chmod +x install_modelsim.exp && ./install_modelsim.exp
+
+# Setting PATH
 ENV PATH /root/legup_src/legup-4.0/llvm/Release/bin:/root/altera/13.1/modelsim_ase/linuxaloem:/root/gxemul_src/gxemul-0.6.0.1:$PATH
-
-RUN chmod +x install_modelsim && ./install_modelsim
 
 # Cleanup
 RUN rm modelsim_src/ModelSimSetup-13.1.0.162.run legup_src/legup-4.0.tar.gz gxemul_src/gxemul-0.6.0.1.tar.gz
