@@ -43,4 +43,7 @@ ADD install_modelsim ./
 
 ENV PATH /root/legup_src/legup-4.0/llvm/Release/bin:/root/altera/13.1/modelsim_ase/linuxaloem:/root/gxemul_src/gxemul-0.6.0.1:$PATH
 
-#RUN chmod +x install_modelsim && ./install_modelsim
+RUN chmod +x install_modelsim && ./install_modelsim
+
+# Cleanup
+RUN rm modelsim_src/ModelSimSetup-13.1.0.162.run legup_src/legup-4.0.tar.gz gxemul_src/gxemul-0.6.0.1.tar.gz
