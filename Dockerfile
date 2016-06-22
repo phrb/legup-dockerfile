@@ -1,6 +1,8 @@
 FROM ubuntu:14.04
 MAINTAINER Pedro Bruel <phrb@ime.usp.br>
 
+WORKDIR /root
+
 # Initial Setup
 RUN sudo dpkg --add-architecture i386
 
@@ -22,18 +24,23 @@ libxext6:i386 libxft2:i386 libxrender1:i386 libxt6:i386 libxtst6:i386
 RUN ln -s /usr/bin/clang-3.5 /usr/bin/clang
 
 # Installing GXemul
-RUN cd && mkdir gxemul_src && cd gxemul_src
-RUN wget http://gxemul.sourceforge.net/src/gxemul-0.6.0.1.tar.gz
-RUN tar xvf gxemul-0.6.0.1.tar.gz && cd gxemul-0.6.0.1
-RUN ./configure && make -j4
+RUN mkdir gxemul_src && cd gxemul_src && wget http://gxemul.sourceforge.net/src/gxemul-0.6.0.1.tar.gz
+RUN cd gxemul_src && tar xvf gxemul-0.6.0.1.tar.gz
+RUN cd gxemul_src/gxemul-0.6.0.1 && ./configure && make -j4
 
 # Installing LegUp
-RUN cd && mkdir legup_src && cd legup_src
-RUN wget http://legup.eecg.utoronto.ca/releases/legup-4.0.tar.gz
-RUN tar xvzf legup-4.0.tar.gz && cd legup-4.0
-RUN make -j4 && export PATH=$PWD/llvm/Release/bin:$PATH
+RUN mkdir legup_src && cd legup_src && wget http://legup.eecg.utoronto.ca/releases/legup-4.0.tar.gz
+RUN cd legup_src && tar xvzf legup-4.0.tar.gz
+# Warning: make ends with error 2, but compilation works.
+#          Must test if LegUp is installed properly.
+RUN cd legup_src/legup-4.0 && make -j4; exit 0 && PATH=$PWD/llvm/Release/bin:$PATH
 
 # Installing ModelSim
-RUN cd && mkdir modelsim_src && cd modelsim_src
-RUN wget http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/ModelSimSetup-13.1.0.162.run
-RUN chmod +x ModelSimSetup-13.1.0.162.run
+RUN mkdir modelsim_src && cd modelsim_src && wget http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/ModelSimSetup-13.1.0.162.run
+RUN cd modelsim_src && chmod +x ModelSimSetup-13.1.0.162.run
+
+ADD install_modelsim ./
+
+ENV PATH /root/legup_src/legup-4.0/llvm/Release/bin:/root/altera/13.1/modelsim_ase/linuxaloem:/root/gxemul_src/gxemul-0.6.0.1:$PATH
+
+#RUN chmod +x install_modelsim && ./install_modelsim
