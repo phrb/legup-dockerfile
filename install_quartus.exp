@@ -30,8 +30,8 @@ expect {
                              exp_continue
                            }
     "*Devices \\\[Y/n\\\]*" { send "Y\r"
-                          exp_continue
-                        }
+                              exp_continue
+                            }
     "*Devices - Arria II*" { send "Y\r"
                              exp_continue
                            }
