@@ -38,7 +38,7 @@ ENV PATH /root/legup_src/legup-4.0/llvm/Release/bin:/root/gxemul_src/gxemul-0.6.
 # Installing Quartus
 # From the Internet
 RUN mkdir quartus_src && cd quartus_src && wget http://download.altera.com/akdlm/software/acdsinst/16.0/211/ib_tar/Quartus-lite-16.0.0.211-linux.tar
-RUN cd quartus_src && tar xvf Quartus-web-13.0.1.232-linux.tar && rm Quartus-web-13.0.1.232-linux.tar
+RUN cd quartus_src && tar xvf Quartus-lite-16.0.0.211-linux.tar && rm Quartus-lite-16.0.0.211-linux.tar
 
 # Using a Local Copy
 # WARNING: EXTREMELY DISK IO INTENSIVE
