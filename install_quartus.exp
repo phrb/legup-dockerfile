@@ -1,7 +1,6 @@
 #!/usr/bin/expect
 set timeout -1
-#spawn /root/quartus_src/setup.sh
-spawn /root/setup.sh
+spawn /root/quartus_src/setup.sh
 expect {
     "Press * to continue*" { send "\r"
                              exp_continue
