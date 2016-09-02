@@ -1,0 +1,60 @@
+#!/usr/bin/expect
+set timeout -1
+spawn /root/quartus_src/setup.sh
+expect {
+    "Press * to continue*" { send "\r"
+                             exp_continue
+                           }
+    "ModelSim-Altera Starter Edition*" { send "Y\r"
+                                         exp_continue
+                                       }
+    "ModelSim-Altera Edition*" { send "N\r"
+                                 exp_continue
+                               }
+    "Do you accept this license?*" { send "y\r"
+                                     exp_continue
+                                   }
+    "Installation directory*" { send "\r"
+                                exp_continue
+                              }
+    "Provide your feedback at*" { send "N\r"
+                                  exp_continue
+                                }
+    "Quartus Prime Lite Edition (Free)  \\\[Y/n\\\]*" { send "Y\r"
+                                                        exp_continue
+                                                      }
+    "*Quartus II Software 64-bit support*" { send "Y\r"
+                                             exp_continue
+                                           }
+    "*Quartus Prime Help*" { send "n\r"
+                             exp_continue
+                           }
+    "*Devices \\\[Y/n\\\]*" { send "Y\r"
+                              exp_continue
+                            }
+    "*Devices - Arria II*" { send "Y\r"
+                             exp_continue
+                           }
+    "*Devices - Cyclone IV*" { send "Y\r"
+                                      exp_continue
+                                    }
+    "*Devices - Cyclone V*" { send "Y\r"
+                              exp_continue
+                            }
+    "*Devices - MAX II*" { send "Y\r"
+                           exp_continue
+                         }
+    "*Devices - MAX 10*" { send "Y\r"
+                           exp_continue
+                         }
+    "Is the selection above correct?*" { send "Y\r"
+                                         exp_continue
+                                       }
+    "Create shortcuts on Desktop*" { send "n\r"
+                                     exp_continue
+                                   }
+    "Launch Quartus *" { send "n\r"
+                         exp_continue
+                       }
+    eof
+}

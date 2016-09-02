@@ -1,7 +1,8 @@
 #### LegUp Docker Image
 
 This repository contains a Dockerfile to generate an image with a LegUp
-installation, including Altera Quartus Prime and GXemul.
+installation, including Altera Quartus Prime and GXemul. There is also
+a lighter version including only LegUp.
 
 ##### Running the Dockerfile
 
