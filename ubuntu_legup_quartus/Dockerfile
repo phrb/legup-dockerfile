@@ -37,8 +37,8 @@ ENV PATH /root/legup_src/legup-4.0/llvm/Release/bin:/root/gxemul_src/gxemul-0.6.
 
 # Installing Quartus
 # From the Internet
-RUN mkdir quartus_src && cd quartus_src && wget http://download.altera.com/akdlm/software/acdsinst/16.0/211/ib_tar/Quartus-lite-16.0.0.211-linux.tar
-RUN cd quartus_src && tar xvf Quartus-lite-16.0.0.211-linux.tar && rm Quartus-lite-16.0.0.211-linux.tar
+RUN mkdir quartus_src && cd quartus_src && wget http://download.altera.com/akdlm/software/acdsinst/16.0/211/ib_tar/Quartus-16.0.0.211-linux-complete.tar 
+RUN cd quartus_src && tar xvf Quartus-16.0.0.211-linux.tar && rm Quartus-16.0.0.211-linux.tar
 
 # Using a Local Copy
 # WARNING: EXTREMELY DISK IO INTENSIVE
@@ -46,11 +46,11 @@ RUN cd quartus_src && tar xvf Quartus-lite-16.0.0.211-linux.tar && rm Quartus-li
 #ADD Quartus-lite-16.0.0.211-linux.tar ./quartus_src
 
 # Run install script
-ADD install_quartus.exp ./quartus_src
-RUN cd quartus_src && chmod +x install_quartus.exp && ./install_quartus.exp
+# ADD install_quartus.exp ./quartus_src
+# RUN cd quartus_src && chmod +x install_quartus.exp && ./install_quartus.exp
 
 # Setup Quartus Libraries
-RUN ln -s /root/altera_lite/16.0/quartus/linux64/* /usr/lib/; exit 0
+# RUN ln -s /root/altera_lite/16.0/quartus/linux64/* /usr/lib/; exit 0
 
 # Setting PATH for Vsim and Quartus
-ENV PATH /root/altera_lite/16.0/modelsim_ase/linuxaloem:/root/altera_lite/16.0/quartus/bin:$PATH
+# ENV PATH /root/altera_lite/16.0/modelsim_ase/linuxaloem:/root/altera_lite/16.0/quartus/bin:$PATH
